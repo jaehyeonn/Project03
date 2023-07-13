@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
         float horizon = Input.GetAxis("Horizontal");
         float movement = horizon * 10 * Time.deltaTime;
         transform.Translate(Vector3.right * movement);
+
+        animator.SetBool("Groun", isGrounded);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -46,7 +48,18 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        jumpCount = 0;
+        if (0.7f < collision.contacts[0].normal.y)
+        {
+            isGrounded = true;
+            jumpCount = 0;
+        }
+        
+    }
+   
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isGrounded = false;
+
     }
 
 
