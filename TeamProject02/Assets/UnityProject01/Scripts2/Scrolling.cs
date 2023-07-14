@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Scrolling : MonoBehaviour
 {
-    private Rigidbody2D playerRigid = default;
-    private Animator animator = default;
-    private AudioSource playerAudio = default;
-
-    private bool isGrounded = false;
-    private bool isDead = false;
+    
 
     public float speed = 10f; //이동속도
     private float width;
+
+    private Player player;
+
 
     private void Awake()
     {
         BoxCollider2D backgrooundCollider = GetComponent<BoxCollider2D>();
         width = backgrooundCollider.size.x;
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     // Start is called before the first frame update
     void Start()
@@ -28,6 +28,11 @@ public class Scrolling : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.isDead == true)
+        {
+            return;
+        }
+
         float horizon = Input.GetAxis("Horizontal");
         float movement = horizon * 10 * Time.deltaTime;
         transform.Translate(Vector3.left * movement);
@@ -42,6 +47,7 @@ public class Scrolling : MonoBehaviour
         {
             Reposition2();
         }
+       
     }
     private void Reposition()
     {

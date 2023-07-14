@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     private int jumpCount = 0;
     private bool isGrounded = false;
-    private bool isDead = false;
+    public bool isDead = false;
 
     private Rigidbody2D playerRigid = default;
     private Animator animator = default;
@@ -42,10 +42,7 @@ public class Player : MonoBehaviour
 
         animator.SetBool("Groun", isGrounded);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        jumpCount = 0;
-    }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (0.7f < collision.contacts[0].normal.y)
@@ -62,5 +59,22 @@ public class Player : MonoBehaviour
 
     }
 
+    public void Die()
+    {
+        animator.SetTrigger("Die");
+        //playerAudio.clip = deathClip;
+        //playerAudio.Play();
+
+        playerRigid.velocity = Vector2.zero;
+        isDead = true;
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Dead") && isDead == false)
+        {
+            Die();
+        }
+    }
 
 }
