@@ -36,9 +36,9 @@ public class Player : MonoBehaviour
             //playerAudio.Play();
             playerRigid.velocity = playerRigid.velocity * 0.5f;
         }
-        float horizon = Input.GetAxis("Horizontal");
-        float movement = horizon * 10 * Time.deltaTime;
-        transform.Translate(Vector3.right * movement);
+        //float horizon = Input.GetAxis("Horizontal");
+        //float movement = horizon * 10 * Time.deltaTime;
+        //transform.Translate(Vector3.right * movement);
 
         animator.SetBool("Groun", isGrounded);
     }
