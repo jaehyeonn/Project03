@@ -34,7 +34,7 @@ public class Scrolling : MonoBehaviour
         }
 
         float horizon = Input.GetAxis("Horizontal");
-        float movement = horizon * 10 * Time.deltaTime;
+        float movement = horizon * 6 * Time.deltaTime;
         transform.Translate(Vector3.left * movement);
 
         //transform.Translate(Vector3.left * speed * Time.deltaTime);
